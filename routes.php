@@ -1,4 +1,5 @@
-<?php require 'connection.php'
+<?php require 'connection.php';
+header('Content-Type: application/json');
 
 $method = $_SERVER['REQUEST_METHOD'];
 

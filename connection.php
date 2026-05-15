@@ -5,8 +5,8 @@ $pass = '';
 try{
 $connection = new PDO($dsn,$user,$pass);
 $connection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-echo "connected :) <br>";
 
 }catch(PDOException $err){
-    echo "connection failed :( <br>" . "Error : " . $err->getMessage();
+    echo json_encode(["error" => "connection failed :(" . $err->getMessage()]);
+    exit;
 }
