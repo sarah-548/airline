@@ -51,11 +51,33 @@ if ($method === 'GET') {
         http_response_code(500);
         echo json_encode(['error' => $e->getMessage()]);
     }
-}/* elseif ($method === 'PATCH') {
+}/* elseif ($method === 'PATCH') {}*/
     
-} elseif ($method === 'DELETE') {
-    
-}*/ else {
+elseif ($method === 'DELETE') {
+    try{
+        if(isset($_GET['airline_name'])){
+        $check = $connection->prepare("SELECT * FROM airline WHERE airline_name = ?");
+        $check->execute([$_GET['airline_name']]);
+        $airline = $check->fetch(PDO::FETCH_ASSOC);
+        if (!$airline) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Airline not found']);
+            exit;
+        }
+        $getall=$connection->prepare("DELETE FROM airline WHERE airline_name = ?");
+        $getall->execute([$_GET['airline_name']]);
+        http_response_code(200);
+        $name=$_GET['airline_name'];
+        echo json_encode(['message' => $name . ' deleted successfully']);
+        }else {
+            http_response_code(400);
+            echo json_encode(['error' => 'Please provide the name of the airline you want to delete']);
+        }
+        }catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(['error' => $e->getMessage()]);
+    }
+} else {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed']);
 }
