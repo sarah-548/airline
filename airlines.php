@@ -5,10 +5,30 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method === 'GET') {
     try{
+        if(isset($_GET['airline_id'])){
+        $getall=$connection->prepare("SELECT * FROM airline WHERE airline_id = ?");
+        $getall->execute([$_GET['airline_id']]);
+        $airline=$getall->fetchAll(PDO::FETCH_ASSOC);
+        if(!$airline) http_response_code(404);
+        else{
+        http_response_code(200);
+        echo json_encode($airline);}
+        }
+        elseif(isset($_GET['airline_name'])){
+        $getall=$connection->prepare("SELECT * FROM airline WHERE airline_name = ?");
+        $getall->execute([$_GET['airline_name']]);
+        $airline=$getall->fetchAll(PDO::FETCH_ASSOC);
+        if(!$airline) http_response_code(404);
+        else{
+        http_response_code(200);
+        echo json_encode($airline);}
+        }
+        else{
         $getall=$connection->query('SELECT * FROM airline');
         $airline=$getall->fetchAll(PDO::FETCH_ASSOC);
         http_response_code(200);
         echo json_encode($airline);}
+        }
     catch(PDOException $err){
         http_response_code(500);
         echo json_encode(["error"=>"failed".$err->getMessage()]);

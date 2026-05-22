@@ -3,9 +3,20 @@ header('Content-Type: application/json');
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-/*if ($method === 'GET') {
-    
-} else*/if ($method === 'POST') {
+if ($method === 'GET') {
+        if(isset($_GET['name'])){
+        $getall=$connection->prepare("SELECT * FROM employee WHERE name = ?");
+        $getall->execute([$_GET['name']]);
+        $employee=$getall->fetchAll(PDO::FETCH_ASSOC);
+        if(!$employee) http_response_code(404);
+        else{
+        http_response_code(200);
+        echo json_encode($employee);}
+        } else {
+            http_response_code(400);
+            echo "please-provide-a-name.";
+            }
+} elseif ($method === 'POST') {
     try {
         $body = json_decode(file_get_contents('php://input'), true);
 
