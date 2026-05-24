@@ -51,7 +51,46 @@ if ($method === 'GET') {
         http_response_code(500);
         echo json_encode(['error' => $e->getMessage()]);
     }
-}/* elseif ($method === 'PATCH') {}*/
+}elseif ($method === 'PATCH') {
+    try {
+        if (!isset($_GET['airline_id'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Airline ID is required']);
+            exit;
+        }
+        $check = $connection->prepare("SELECT * FROM airline WHERE airline_id = ?");
+        $check->execute([$_GET['airline_id']]);
+        if (!$check->fetch(PDO::FETCH_ASSOC)) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Airline does not exist']);
+            exit;
+        }
+        $body = json_decode(file_get_contents('php://input'), true);
+        $allowed = ['airline_name', 'phone_number', 'contact_person', 'address', 'current_balance'];
+        $fields = []; $values = [];  
+        foreach ($allowed as $field) {
+            if (isset($body[$field])) {
+                $fields[] = "$field = ?";
+                $values[] = $body[$field];
+            }
+        }
+        if (empty($fields)) {
+            http_response_code(400);
+            echo json_encode(['error' => 'No provided fields to update']);
+            exit;
+        }
+        $values[] = $_GET['airline_id'];
+        $sql = "UPDATE airline SET " . implode(', ', $fields) . " WHERE airline_id = ?";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute($values);
+        http_response_code(200);
+        echo json_encode(['message' => 'Airline updated successfully']);
+
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(['error' => $e->getMessage()]);
+    }
+}
     
 elseif ($method === 'DELETE') {
     try{
