@@ -1,0 +1,441 @@
+{
+  "info": {
+    "_postman_id": "7f509503-0752-4997-a536-9de00564ffda",
+    "name": "airlineCollec",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54450094",
+    "_collection_link": "https://go.postman.co/collection/54450094-7f509503-0752-4997-a536-9de00564ffda?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "airline get",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/airlines.php",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "airlines.php"
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "aircraft get",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost/airline/aircraft.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "airline",
+            "aircraft.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "employee insert",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\" : \"Mostafa Samir\", \r\n    \"birth_date\" : \"14-09-14\", \r\n    \"gender\" : \"male\", \r\n    \"position\" : \"Janitor\", \r\n    \"airline_name\" : \"Egypt Air\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base}}/employees.php",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "employees.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "airline insert",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"airline_name\": \"Egypt Air\",\r\n    \"phone_number\": \"+20-2-465-0168\",\r\n    \"contact_person\": \"Mostafa Ahmed\",\r\n    \"address\": \"36 Nasr City, Cairo, Egypt\",\r\n    \"current_balance\": 4500000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base}}/airlines.php",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "airlines.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "aircraft insert",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"model\": \"Airbus A330\",\r\n    \"airline_name\": \"Egypt Air\",\r\n    \"capacity\": 160\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base}}/aircraft.php",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "aircraft.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "airline get by id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/airlines.php?airline_id=3",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "airlines.php"
+          ],
+          "query": [
+            {
+              "key": "airline_id",
+              "value": "3"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "airline get by name",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/airlines.php?airline_name=NileAir",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "airlines.php"
+          ],
+          "query": [
+            {
+              "key": "airline_name",
+              "value": "NileAir"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "employee get by name",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/employees.php?name=Nancy White",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "employees.php"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "Nancy White"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "airline delete",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\" : \"Mostafa Samir\", \r\n    \"birth_date\" : \"14-09-14\", \r\n    \"gender\" : \"male\", \r\n    \"position\" : \"Janitor\", \r\n    \"airline_name\" : \"Egypt Air\"\r\n}"
+        },
+        "url": {
+          "raw": "{{base}}/airlines.php?airline_name=Egypt Air",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "airlines.php"
+          ],
+          "query": [
+            {
+              "key": "airline_name",
+              "value": "Egypt Air"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "routes get all",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/routes.php",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "routes.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "transactions get all",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/transactions.php",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "transactions.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "routes insert",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"origin\": \"Cairo\",\r\n    \"classification\": \"international\",\r\n    \"distance\": 2100,\r\n    \"destination\": \"Amman\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base}}/routes.php",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "routes.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "routes assign",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"route_id\": 1,\r\n    \"aircraft_id\": 2,\r\n    \"no_of_passengers\": 150,\r\n    \"ticket_price\": 500,\r\n    \"departure_date\": \"2026-06-01\",\r\n    \"departure_time\": \"09:00\",\r\n    \"arrival_date\": \"2026-06-01\",\r\n    \"arrival_time\": \"14:00\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base}}/routes.php?assign",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "routes.php"
+          ],
+          "query": [
+            {
+              "key": "assign",
+              "value": null
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "airline update",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"phone_number\": \"+20-2-555-0167\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base}}/airlines.php?airline_id=5",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "airlines.php"
+          ],
+          "query": [
+            {
+              "key": "airline_id",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "transactions summary",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/transactions.php?summary",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "transactions.php"
+          ],
+          "query": [
+            {
+              "key": "summary",
+              "value": null
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "new transaction",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"amount\": 900,\r\n    \"description\": \"seats maintenance\",\r\n    \"airline_id\": 5,\r\n    \"date\": \"2026-05-21\",\r\n    \"transaction_type\": \"buy\",\r\n    \"category\": \"maintenance\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base}}/transactions.php",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "transactions.php"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base",
+      "value": ""
+    }
+  ]
+}
